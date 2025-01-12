@@ -11,77 +11,91 @@ const alerta = () => {
 };
 
 // Sweet Alert Exito
-function sweetAlertExito(mensaje) {
+function sweetAlertExito(message, fontSize) {
   Swal.fire({
     position: "center",
-    width: "180px",
+    width: "200px",
     heightAuto: false,
     showConfirmButton: false,
-    title: mensaje,
     background: "#ABEBC6",
     icon: "success",
     iconColor: "green",
     color: "green",
-    timer: 2000,
+    timer: 1300,
+    html: `<div style="font-size: ${fontSize}; text-align: center;">${message}</div>`, // Personaliza el tamaño del mensaje
   });
 }
 
 // Sweet Alert Error
-function sweetAlertError(mensaje) {
+function sweetAlertError(message, fontSize) {
   Swal.fire({
     position: "center",
-    width: "180px",
+    width: "200px",
     heightAuto: false,
     showConfirmButton: false,
-    title: mensaje,
     background: "#E6B0AA",
     icon: "error",
     iconColor: "red",
     color: "red",
-    timer: 2000,
+    timer: 1300,
+    html: `<div style="font-size: ${fontSize}; text-align: center;">${message}</div>`, // Personaliza el tamaño del mensaje
   });
 }
 
 // Sweet Alert de confirmacion
-  const sweetAlertConfirmacion = (mensaje, callback) => {
-    Swal.fire({
-      title: mensaje,
-      position: "center",
-      icon: "warning",
-      iconColor: "#F39C12",
-      background: "#F9E79F",
-      width: "300px",
-      heightAuto: false,
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Aceptar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        callback(true);
-      }else{
-        callback(false);
+function sweetAlertConfirmacion (mensaje, tamanoTitulo, callback) {
+  Swal.fire({
+    title: mensaje,
+    position: "center",
+    icon: "warning",
+    iconColor: "#F39C12",
+    background: "#F9E79F",
+    width: "300px",
+    heightAuto: false,
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+    // Modificar el estilo del título directamente
+    didOpen: () => {
+      const title = document.querySelector(".swal2-title");
+      if (title) {
+        title.style.fontSize = tamanoTitulo; // Ajustar el tamaño del título
       }
-    });  
-  };
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
+};
+
 
 // PROGRAMA PRICIPAL
 
 // Acciones al presionar boton mensaje exito
 btnMsgExito.addEventListener('click', () =>{
-  sweetAlertExito('');
+  sweetAlertExito("Envío exitoso!", "1.1em");
 })
 
 // Acciones al presionar boton mensaje error
 btnMsgError.addEventListener("click", ()=>{
-  sweetAlertError('')
+  sweetAlertError("Faltan datos", "1.1em");
 });
 
 // Acciones al presionar boton mensaje de confirmacion
 btnMsgConfirmacion.addEventListener("click", () =>{
-  sweetAlertConfirmacion('Deseas Continuar?',(respuesta) =>{
-    console.log(respuesta)
-  })
+    sweetAlertConfirmacion(
+      "¿Estás seguro de continuar?","1.1em", (confirmado) => {
+        if (confirmado) {
+          alert("Acción confirmada");
+        } else {
+          alert("Acción cancelada");
+        }
+      }
+    );
 
 });
