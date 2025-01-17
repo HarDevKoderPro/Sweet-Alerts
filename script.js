@@ -11,7 +11,7 @@ const alerta = () => {
 };
 
 // Sweet Alert Exito
-function sweetAlertExito(message, fontSize) {
+const sweetAlertExito = (message, fontSize) => {
   Swal.fire({
     position: "center",
     width: "200px",
@@ -27,7 +27,7 @@ function sweetAlertExito(message, fontSize) {
 }
 
 // Sweet Alert Error
-function sweetAlertError(message, fontSize) {
+const sweetAlertError = (message, fontSize) => {
   Swal.fire({
     position: "center",
     width: "200px",
@@ -43,7 +43,7 @@ function sweetAlertError(message, fontSize) {
 }
 
 // Sweet Alert de confirmacion
-function sweetAlertConfirmacion (mensaje, tamanoTitulo, callback) {
+const sweetAlertConfirmacion = (mensaje, tamanoTitulo, callback) => {
   Swal.fire({
     title: mensaje,
     position: "center",
